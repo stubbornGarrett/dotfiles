@@ -15,11 +15,24 @@ set $resolution 1680x1050
 
 # --- COLOR THEME - BEGINN ---
 
-set_from_resource $fg foreground
-set_from_resource $bg background
-set_from_resource $fbg color8
+set_from_resource $actfg CGREEN #FFCC00
+set_from_resource $actbg CGREY2 #222299
+set_from_resource $actbd CGREEN #FF00CC
+set_from_resource $inafg CGREYA #CCFF00
+set_from_resource $inabg CGREY2 #555599
+set_from_resource $inabd CGREY5 #559955
+
+#class                    border  bckrnd    text    indic.     ch_brdr
+client.focused            $actbd  $actbg    $actfg  $actfg     $actbg
+client.focused_inactive   $inabd  $inabg    $inafg  $inabd     $inabd
+client.unfocused          $inabd  $inabg    $inafg  $inabd     $inabd
+client.urgent             #CC0000 $inafg    $inafg  #CC0000    #CC0000
+client.placeholder        $inabd  $inabg    $inafg  $actfg     $inabd
+
+client.background         $actbg
 
 # --- COLOR THEME - END ---
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -83,7 +96,7 @@ bindsym $mod+e layout toggle split
 
 title_align center
 
-default_border pixel 5
+default_border pixel 1
 default_floating_border pixel 2
 #hide_edge_borders both
 
@@ -198,7 +211,7 @@ bar {
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
      #bindsym l exec --no-startup-id i3exit lock, mode "default"
-     bindsym l exec /home/garrett/Scripts/scrlock.sh
+     bindsym l exec --no-startup-id /home/garrett/.config/scripts/scrlock.sh
      bindsym e exec --no-startup-id i3exit logout, mode "default"
      bindsym s exec --no-startup-id i3exit suspend, mode "default"
      bindsym h exec --no-startup-id i3exit hibernate, mode "default"
@@ -209,8 +222,7 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+y exec /home/garrett/Scripts/scrlock.sh
-#bindsym $mod+p exec --no-startup-id i3exit lock, mode "default"
+bindsym $mod+m exec "dm-tool switch-to-greeter"
 
 exec --no-startup-id xset dpms 300
 # --- SYSTEM MODE - END ---

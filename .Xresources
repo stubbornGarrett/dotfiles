@@ -1,43 +1,68 @@
-#define FOREGROUND #00AA00
-#define BACKGROUND #222222
+#define CBLACK #000000
+#define CGREY1 #111111
+#define CGREY2 #222222
+#define CGREY3 #333333
+#define CGREY4 #444444
+#define CGREY5 #555555
+#define CGREY6 #666666
+#define CGREY7 #777777
+#define CGREY8 #888888
+#define CGREY9 #999999
+#define CGREYA #AAAAAA
+#define CGREYB #BBBBBB
+#define CGREYC #CCCCCC
+#define CGREYD #DDDDDD
+#define CGREYE #EEEEEE
+#define CWHITE #FFFFFF
+#define CRED   #AA0000
+#define CGREEN #00AA00
+#define CBLUE  #0000AA
+#define CCYAN  #00AAAA
+#define CPINK  #AA00AA
 
-#define COLOR0  #00AA00
-#define COLOR8  #00AA00
-#define COLOR1  #FF0000
-#define COLOR9  #FF0000
-#define COLOR2  #FF0000
-#define COLOR10 #FF0000
-#define COLOR3  #FF0000
-#define COLOR11 #FF0000
-#define COLOR4  #FF0000
-#define COLOR12 #FF0000
-#define COLOR5  #FF0000
-#define COLOR13 #FF0000
-#define COLOR6  #FF0000
-#define COLOR14 #FF0000
-#define COLOR7  #222222
-#define COLOR15 #222222
+*.foreground: CGREEN
+*.background: CGREY2
+
+*.color0 :  CCYAN
+*.color1 :  CCYAN
+*.color2 :  CCYAN
+*.color3 :  CCYAN
+*.color4 :  CCYAN
+*.color5 :  CCYAN
+*.color6 :  CCYAN
+*.color7 :  CCYAN
+*.color8 :  CCYAN
+*.color9 :  CCYAN
+*.color10:  CCYAN
+*.color11:  CCYAN
+*.color12:  CCYAN
+*.color13:  CCYAN
+*.color14:  CCYAN
+*.color15:  CCYAN
+
+! xTerm
+XTerm.termName: xterm-256color
+XTerm*pointerColor           : PINK
+XTerm*pointerColorBackground : GREY1
+XTerm*cursorColor            : white
+XTerm*cursorBlink            : true
 
 
-*.foreground: FOREGROUND
-*.background: BACKGROUND
+! Fonts ====================================================
+! set font and fontsize - DejaVu Sans Mono
+XTerm*faceName: ttf-inconsolata
+XTerm*faceSize: 11
 
-*.color0:  COLOR0
-*.color8:  COLOR8
-*.color1:  COLOR1
-*.color9:  COLOR9
-*.color2:  COLOR2
-*.color10: COLOR10
-*.color3:  COLOR3
-*.color11: COLOR11
-*.color4:  COLOR4
-*.color2:  COLOR2
-*.color5:  COLOR5
-*.color13: COLOR13
-*.color6:  COLOR6
-*.color14: COLOR14
-*.color7:  COLOR7
-*.color15: COLOR15
+! http://forums.fedoraforum.org/showpost.php?p=1538211&postcount=3
+! https://stackoverflow.com/a/29551654
+! XTerm*title: xterm
+! XTerm*internalBorder: 3
+! XTerm*loginShell: true
+! XTerm*scrollBar: false
+! XTerm*scrollKey: true
+! XTerm*saveLines: 1250
+! XTerm*multiClickTime: 250
+! XTerm*renderFont: true
 
 
 !-------- Xterm Terminal Settings {{{
@@ -51,12 +76,7 @@
 ! Do not set the TERM variable from your ~/.bashrc or ~/.bash_profile or similar file.
 ! The terminal itself should report the correct TERM to the system so that the proper terminfo file will be used.
 ! Two usable terminfo names are xterm and xterm-256color
-XTerm.termName: xterm-256color
 
-! Fonts ====================================================
-! set font and fontsize
-XTerm*faceName: DejaVu Sans Mono
-XTerm*faceSize: 13
 
 ! VT Font Menu: Unreadable
 xterm*faceSize1: 8
@@ -73,12 +93,6 @@ xterm*faceSize5: 22
 ! Ensure that your locale is set up for UTF-8. If you do not use UTF-8, you may need to force xterm to more strictly follow your locale by setting
 XTerm.vt100.locale: true
 
-! Cursor ====================================================
-! pointer and cursor (blinking and color)
-XTerm*pointerColor: white
-XTerm*pointerColorBackground: black
-XTerm*cursorColor: white
-XTerm*cursorBlink: true
 
 
 !! Selecting Text ========================================================
@@ -177,22 +191,7 @@ XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]]
 
 
 
-! http://forums.fedoraforum.org/showpost.php?p=1538211&postcount=3
-! https://stackoverflow.com/a/29551654
-! XTerm*title: xterm
-! XTerm*background: #011622
-! XTerm*foreground: WhiteSmoke
-! XTerm*pointerColor: white
-! XTerm*pointerColorBackground: #011622
-! XTerm*cursorColor: #EBD27D
-! XTerm*internalBorder: 3
-! XTerm*loginShell: true
-! XTerm*scrollBar: false
-! XTerm*scrollKey: true
-! XTerm*saveLines: 1250
-! XTerm*multiClickTime: 250
-! XTerm*Geometry: 140x50+110+60
-! XTerm*renderFont: true
+
 
 ! set fontsize
 ! xterm*font:     *-fixed-*-*-*-24-*
