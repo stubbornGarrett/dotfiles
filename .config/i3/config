@@ -15,12 +15,12 @@ set $resolution 1680x1050
 
 # --- COLOR THEME - BEGINN ---
 
-set_from_resource $actfg CGREEN #FFCC00
-set_from_resource $actbg CGREY2 #222299
-set_from_resource $actbd CGREEN #FF00CC
-set_from_resource $inafg CGREYA #CCFF00
-set_from_resource $inabg CGREY2 #555599
-set_from_resource $inabd CGREY5 #559955
+set_from_resource $actfg foreground  #FFCC00
+set_from_resource $actbg background  #222299
+set_from_resource $actbd border      #88cc88
+set_from_resource $inafg iforeground #CCFF00
+set_from_resource $inabg ibackground #555599
+set_from_resource $inabd iborder     #111111
 
 #class                    border  bckrnd    text    indic.     ch_brdr
 client.focused            $actbd  $actbg    $actfg  $actfg     $actbg
@@ -43,7 +43,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # --- BASIC SETTINGS - BEGINN ---
 # Default font
-font pango:ttf-inconsolata 11
+font pango:inconsolata 11
 
 # start a terminl
 bindsym $mod+Return exec xterm
@@ -53,6 +53,11 @@ bindsym $mod+Shift+q kill
 
 # start dmenu
 bindsym $mod+d exec dmenu_run -fn "ttf-inconsolata 50"
+
+#focus_follows_mouse yes
+#popup_during_fullscreen smart
+workspace_auto_back_and_forth yes
+force_display_urgency_hint 1000ms
 
 # change focus
 bindsym $mod+j focus left
@@ -199,10 +204,43 @@ assign [class="chromium"] $ws2
 # --- WORKSPACE SETTINGS - END ---
 
 
+
 # --- i3status SETTINGS - BEGINN ---
 bar {
-        font pango:ttf-inconsolata 10
+        font pango:DejaVu Sans Mono 11
         status_command i3status
+        i3bar_command i3bar --transparency
+        output $output
+        position bottom
+        tray_output $output
+        tray_padding 5
+        separator_symbol " | "
+        workspace_buttons yes
+        strip_workspace_numbers yes
+        strip_workspace_name no
+
+        colors {
+          background #00000033
+          statusline #ffffffff
+          separator  #333333ff
+
+          set_from_resource $focusedfg  barActFG #ffffff
+          set_from_resource $focusedbg  barActBG #00000033
+          set_from_resource $focusedbd  barActBD #ffff00
+          set_from_resource $inactivefg barInaFG #000000
+          set_from_resource $inactivebg barInaBG #ffffff33
+          set_from_resource $inactivebd barInaBD #00ffff
+          set_from_resource $urgentfg   barUrgFG #ffffff
+          set_from_resource $urgentbg   barUrgBG #000000
+          set_from_resource $urgentbd   barUrgBD #ff00ff
+
+          #class             border      background  text
+          focused_workspace  $focusedbd  $focusedbg  $focusedfg
+          active_workspace   $focusedbd  $focusedbg  $focusedfg
+          inactive_workspace $inactivebd $inactivebg $inactivefg
+          urgent_workspace   $urgentbd   $urgentbg   $urgentfg
+          #binding_mode       #2f343a #900000 #ffffff
+        }
 }
 # --- i3status SETTINGS - END ---
 
