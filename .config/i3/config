@@ -15,23 +15,39 @@ set $resolution 1680x1050
 
 # --- COLOR THEME - BEGINN ---
 
-set_from_resource $actfg foreground  #FFCC00
-set_from_resource $actbg background  #222299
-set_from_resource $actbd border      #88cc88
-set_from_resource $inafg iforeground #CCFF00
-set_from_resource $inabg ibackground #555599
-set_from_resource $inabd iborder     #111111
+set_from_resource $actfg i3wm.foreground  #FFCC00
+set_from_resource $actbg i3wm.background  #222299
+set_from_resource $inafg i3wm.color7      #CCFF00
+set_from_resource $inabg i3wm.color8      #555599
 
-#class                    border  bckrnd    text    indic.     ch_brdr
-client.focused            $actbd  $actbg    $actfg  $actfg     $actbg
-client.focused_inactive   $inabd  $inabg    $inafg  $inabd     $inabd
-client.unfocused          $inabd  $inabg    $inafg  $inabd     $inabd
-client.urgent             #CC0000 $inafg    $inafg  #CC0000    #CC0000
-client.placeholder        $inabd  $inabg    $inafg  $actfg     $inabd
+#class                    border  bckrnd text    indic.  ch_brdr
+client.focused            $actfg  $actbg $actfg  $actfg  $actfg
+client.focused_inactive   $inabg  $inabg $inafg  $inafg  $inafg
+client.unfocused          $inabg  $inabg $inafg  $inafg  $inafg
+client.urgent             #CC0000 $actfg $actfg  #CC0000 #CC0000
+client.placeholder        $inabg  $inabg inafg   $actfg  $inabg
 
 client.background         $actbg
 
 # --- COLOR THEME - END ---
+
+
+
+# --- WINDOW LAYOUT - BEGINN ---
+
+title_align center
+
+default_border pixel 1
+default_floating_border pixel 2
+hide_edge_borders none
+
+gaps inner  5
+gaps outer  3
+smart_gaps    inverse_outer
+smart_borders on
+
+# --- WINDOWS LAYOUT - END ---
+
 
 
 # reload the configuration file
@@ -41,22 +57,24 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+
 # --- BASIC SETTINGS - BEGINN ---
+
 # Default font
 font pango:inconsolata 11
 
 # start a terminl
-bindsym $mod+Return exec xterm
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu
-bindsym $mod+d exec dmenu_run -fn "ttf-inconsolata 50"
+bindsym $mod+d exec dmenu_run -b -i -fn inconsolata
 
 #focus_follows_mouse yes
-#popup_during_fullscreen smart
-workspace_auto_back_and_forth yes
+popup_during_fullscreen smart
+workspace_auto_back_and_forth no
 force_display_urgency_hint 1000ms
 
 # change focus
@@ -97,17 +115,6 @@ bindsym $mod+e layout toggle split
 # --- BASIC SETTINGS - END ---
 
 
-# --- WINDOW LAYOUT - BEGINN ---
-
-title_align center
-
-default_border pixel 1
-default_floating_border pixel 2
-#hide_edge_borders both
-
-# --- WINDOWS LAYOUT - END ---
-
-
 # --- FLOATING WINDOWS - BEGINN ---
 
 # toggle tiling / floating
@@ -115,6 +122,26 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+
+bindsym $mod+m mode "move" focus floating
+mode "move" {
+    bindsym Tab   focus right
+
+    bindsym Left  move left  15
+    bindsym Down  move down  15
+    bindsym Up    move up    15
+    bindsym Right move right 15
+
+    bindsym h     move left  15
+    bindsym j     move down  15
+    bindsym k     move up    15
+    bindsym l     move right 15
+
+    # back to normal: Enter or Escape
+    #bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 # --- FLOATING WINDOWS - END ---
 
@@ -127,16 +154,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width       10 px or 2 ppt
+        bindsym k resize grow height        10 px or 2 ppt
+        bindsym l resize shrink height      10 px or 2 ppt
+        bindsym semicolon resize grow width 10 px or 2 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width    10 px or 2 ppt
+        bindsym Down resize grow height     10 px or 2 ppt
+        bindsym Up resize shrink height     10 px or 2 ppt
+        bindsym Right resize grow width     10 px or 2 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -157,7 +184,7 @@ set $ws4 "4: -"
 set $ws5 "5: -"
 set $ws6 "6: -"
 set $ws7 "7: -"
-set $ws8 "8: -"
+set $ws8 "8: "
 set $ws9 "9: VM"
 set $ws10 "10: "
 
@@ -207,40 +234,34 @@ assign [class="chromium"] $ws2
 
 # --- i3status SETTINGS - BEGINN ---
 bar {
-        font pango:DejaVu Sans Mono 11
-        status_command i3status
-        i3bar_command i3bar --transparency
-        output $output
-        position bottom
-        tray_output $output
-        tray_padding 5
-        separator_symbol " | "
-        workspace_buttons yes
-        strip_workspace_numbers yes
-        strip_workspace_name no
+  font pango:DejaVu Sans Mono 11
+  status_command i3status
+  i3bar_command i3bar --transparency
+  output $output
+  position bottom
+  tray_output $output
+  tray_padding 5
+  separator_symbol " | "
+  workspace_buttons yes
+  strip_workspace_numbers yes
+  strip_workspace_name no
 
-        colors {
-          background #00000033
-          statusline #ffffffff
-          separator  #333333ff
+  colors {
+    background #55885544
+    statusline #ffffffff
 
-          set_from_resource $focusedfg  barActFG #ffffff
-          set_from_resource $focusedbg  barActBG #00000033
-          set_from_resource $focusedbd  barActBD #ffff00
-          set_from_resource $inactivefg barInaFG #000000
-          set_from_resource $inactivebg barInaBG #ffffff33
-          set_from_resource $inactivebd barInaBD #00ffff
-          set_from_resource $urgentfg   barUrgFG #ffffff
-          set_from_resource $urgentbg   barUrgBG #000000
-          set_from_resource $urgentbd   barUrgBD #ff00ff
+    separator  #666666ff
 
-          #class             border      background  text
-          focused_workspace  $focusedbd  $focusedbg  $focusedfg
-          active_workspace   $focusedbd  $focusedbg  $focusedfg
-          inactive_workspace $inactivebd $inactivebg $inactivefg
-          urgent_workspace   $urgentbd   $urgentbg   $urgentfg
-          #binding_mode       #2f343a #900000 #ffffff
-        }
+    set_from_resource $urgfg i3wm.color1 #ffffff
+    set_from_resource $urgbg i3wm.color0 #000000
+    set_from_resource $urgbd i3wm.color1 #ff00ff
+
+    #class             border  bckrnd  text
+    focused_workspace  $actfg  $actbg  $actfg
+    active_workspace   $actfg  $actbg  $actfg
+    inactive_workspace $inafg  $inabg  $inafg
+    urgent_workspace   $urgfg  $urgbg  $urgfg
+  }  
 }
 # --- i3status SETTINGS - END ---
 
@@ -249,7 +270,8 @@ bar {
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
      #bindsym l exec --no-startup-id i3exit lock, mode "default"
-     bindsym l exec --no-startup-id /home/garrett/.config/scripts/scrlock.sh
+     #bindsym l exec --no-startup-id /home/garrett/.config/scripts/scrlock.sh
+     bindsym $mod+o exec "dm-tool switch-to-greeter"
      bindsym e exec --no-startup-id i3exit logout, mode "default"
      bindsym s exec --no-startup-id i3exit suspend, mode "default"
      bindsym h exec --no-startup-id i3exit hibernate, mode "default"
@@ -260,7 +282,7 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+m exec "dm-tool switch-to-greeter"
+bindsym $mod+o exec "dm-tool switch-to-greeter"
 
 exec --no-startup-id xset dpms 300
 # --- SYSTEM MODE - END ---
@@ -299,7 +321,9 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # --- DEFAULT EXECUTIONS ---
 exec firefox
-exec_always feh --bg-scale $wallpaper
+exec --no-startup-id i3-msg 'workspace $ws8; exec urxvt -e glances; workspace $ws1'
+exec_always compton -b
+exec_always feh --bg-fill $wallpaper
 exec_always xrandr --output $output --mode $resolution
 
 #bindsym $mod+< move workspace to output left
