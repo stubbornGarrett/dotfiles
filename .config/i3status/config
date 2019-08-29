@@ -1,0 +1,110 @@
+general {
+  output_format = "i3bar"
+  colors = true
+  color_good     = "#00FF00"
+  color_degraded = "#AAAA00"
+  color_bad      = "#FF0000"
+  interval = 1
+}
+
+order += "run_watch DHCP"
+order += "run_watch VPN"
+order += "run_watch VPNC"
+order += "wireless wlan0"
+order += "ethernet eth0"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "battery 0"
+order += "volume"
+order += "tztime local"
+order += "tztime berlin"
+
+wireless wlan0 {
+  format_up = "(%quality at %essid, %bitrate) %ip"
+  format_down = "down"
+}
+
+ethernet eth0 {
+  format_up = "%ip (%speed)"
+  format_down = "down"
+}
+
+battery 0 {
+  format = "%status%percentage"
+  integer_battery_capacity = true
+  format_down = "n/f"
+  status_chr = ""
+  status_bat = "🔋"
+  status_unk = ""
+  status_full = ""
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 15
+  threshold_type = "percentage"
+  min_width = 60
+  align = "center"
+  separator =false
+}
+
+
+run_watch DHCP {
+  format = "DHCP"
+  pidfile = "/var/run/dhcpcd.pid"
+}
+
+run_watch VPNC {
+  # file containing the PID of a vpnc process
+  pidfile = "/var/run/vpnc/pid"
+  format="%title"
+  format_down="%title"
+}
+
+path_exists VPN {
+  # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+  path = "/proc/sys/net/ipv4/conf/tun0"
+  format="%title"
+  format_down="%title"
+}
+
+
+cpu_usage {
+  format = %usage
+  max_threshold = 90
+  degraded_threshold = 75
+  min_width = 60
+  align = "center"
+}
+
+cpu_temperature 0 {
+  format = "%degrees°C"
+  max_threshold = 70
+  path = "/sys/devices/platform/coretemp.0/temp1_input"
+  min_width = 60
+  align = "center"
+}
+
+volume master {
+  format = " (%devicename): %volume"
+  format_muted = " (%devicename): (%volume)"
+  device = "default"
+  mixer = "Master"
+  mixer_idx = 0
+}
+
+read_file uptime {
+        path = "/proc/uptime"
+}
+
+tztime local {
+  format = "%d.%m.%Y %H:%M:%S %Z"
+  hide_if_equals_localtime = true
+  min_width = 220
+  align = "right"
+}
+
+tztime berlin {
+  format = "%d.%m.%Y %H:%M:%S "
+  timezone = "Europe/Berlin"
+  min_width = 220
+  align = "right"
+}
+
