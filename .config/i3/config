@@ -7,11 +7,19 @@
 
 # Variables -----------------------------------------
 set $mod Mod4
+set $term urxvt
+set $browser firefox
 set $output Virtual-1
 set $wallpaper /home/garrett/Pictures/wallpaper.jpg
 #set $resolution 1920x1080
 set $resolution 1680x1050
 # ---------------------------------------------------
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
 
 # --- COLOR THEME - BEGINN ---
 
@@ -42,20 +50,14 @@ default_floating_border pixel 2
 hide_edge_borders none
 
 gaps inner  5
-gaps outer  3
-smart_gaps    inverse_outer
+gaps outer  1
+smart_gaps    on
 smart_borders on
 
 # --- WINDOWS LAYOUT - END ---
 
 
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
 # --- BASIC SETTINGS - BEGINN ---
@@ -64,10 +66,11 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 font pango:inconsolata 11
 
 # start a terminl
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $mod+q       kill
 
 # start dmenu
 bindsym $mod+d exec dmenu_run -b -i -fn inconsolata
@@ -78,10 +81,10 @@ workspace_auto_back_and_forth no
 force_display_urgency_hint 1000ms
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -89,10 +92,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -100,7 +103,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 # split in vertical orientation
 bindsym $mod+v split v
 
@@ -116,6 +119,8 @@ bindsym $mod+e layout toggle split
 
 
 # --- FLOATING WINDOWS - BEGINN ---
+
+floating_modifier $mod
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -179,7 +184,7 @@ workspace_layout default
 
 set $ws1 "1: "
 set $ws2 "2: "
-set $ws3 "3: -"
+set $ws3 "3: "
 set $ws4 "4: -"
 set $ws5 "5: -"
 set $ws6 "6: -"
@@ -225,8 +230,10 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 
 # Default workspace for applications
-assign [class="firefox"] $ws2
+assign [class="$browser"] $ws2
 assign [class="chromium"] $ws2
+assign [class="Gimp"] $ws3
+assign [class="Blender"] $ws3
 
 # --- WORKSPACE SETTINGS - END ---
 
@@ -241,13 +248,14 @@ bar {
   position bottom
   tray_output $output
   tray_padding 5
-  separator_symbol " | "
+  separator_symbol "|"
   workspace_buttons yes
   strip_workspace_numbers yes
   strip_workspace_name no
+  height 23
 
   colors {
-    background #55885544
+    background #4800c433
     statusline #ffffffff
 
     separator  #666666ff
@@ -320,11 +328,12 @@ bindsym XF86AudioPrev exec playerctl previous
 
 
 # --- DEFAULT EXECUTIONS ---
-exec firefox
-exec --no-startup-id i3-msg 'workspace $ws8; exec urxvt -e glances; workspace $ws1'
-exec_always compton -b
-exec_always feh --bg-fill $wallpaper
-exec_always xrandr --output $output --mode $resolution
+exec --no-startup-id i3-msg 'workspace $ws8; exec $term -e gotop'
+exec --no-startup-id i3-msg 'workspace $ws1; exec $term; exec $term -e ranger'
+exec --no-startup-id $browser
+exec --no-startup-id xcompmgr
+exec_always --no-startup-id feh --bg-fill $wallpaper
+exec_always --no-startup-id xrandr --output $output --mode $resolution
 
 #bindsym $mod+< move workspace to output left
 #bindsym $mod+> move workspace to output right
