@@ -1,42 +1,64 @@
-#define actForeground #00A900
-#define actBackground #111111
-
+#define actForeground #03ff00
+#define actBackground #050a05
 #define inaForeground #88AA88
 #define inaBackground #000000
 #define actBorder     #55AA55
 #define inaBorder     #111111
-
 !! black
-#define COL00 #111111
-#define COL08 #191919
-
+#define COL00 #000000
+#define COL08 #111111
 !! red
-#define COL01 #AF0000
-#define COL09 #880000
-
+#define COL01 #ac0033
+#define COL09 #bd0044
 !! green
-#define COL02 #00A900
-#define COL10 #00EE00
-
+#define COL02 #00ee1e
+#define COL10 #00ff2f
 !! yellow
-#define COL03 #AAAA00
-#define COL11 #EEEE00
-
+#define COL03 #c1c122
+#define COL11 #e2e233
 !! blue
-#define COL04 #0000AA
-#define COL12 #0000EE
-
+#define COL04 #4f4fff
+#define COL12 #2200ff
 !! magenta
-#define COL05 #AA00AA
-#define COL13 #EE00EE
-
+#define COL05 #c500ee
+#define COL13 #d600ff
 !! cyan
-#define COL06 #00AAAA
-#define COL14 #00EEEE
-
+#define COL06 #00a7ee
+#define COL14 #00b8ff
 !! white
-#define COL07 #888888
-#define COL15 #AAAAAA
+#define COL07 #bababa
+#define COL15 #fafafa
+
+!#define actForeground #03ff00
+!#define actBackground #021300
+!#define inaForeground #88AA88
+!#define inaBackground #000000
+!#define actBorder     #55AA55
+!#define inaBorder     #111111
+!! black
+!#define COL00 #111111
+!#define COL08 #191919
+!! red
+!#define COL01 #AF0000
+!#define COL09 #880000
+!! green
+!#define COL02 #2b7b00
+!#define COL10 #25eb00
+!! yellow
+!#define COL03 #aba000
+!#define COL11 #e2e300
+!! blue
+!#define COL04 #5544F8
+!#define COL12 #726bf6
+!! magenta
+!#define COL05 #8e00bf
+!#define COL13 #c300ff
+!! cyan
+!#define COL06 #14a0aa
+!#define COL14 #00efe0
+!! white
+!#define COL07 #bababa
+!#define COL15 #fafafa
 
 ! ####################
 ! #######COLORS#######
@@ -44,36 +66,29 @@
 
 *.foreground:  actForeground
 *.background:  actBackground
-*.cursorColor: COL05
+*.cursorColor: COL13
 
 !! black
 *color0 : COL00
 *color8 : COL08
-
 !! red
 *color1 : COL01
 *color9 : COL09
-
 !! green
 *color2 : COL02
 *color10: COL10
-
 !! yellow
 *color3 : COL03
 *color11: COL11
-
 !! blue
 *color4 : COL04
 *color12: COL12
-
 !! magenta
 *color5 : COL05
 *color13: COL13
-
 !! cyan
 *color6 : COL06
 *color14: COL14
-
 !! white
 *color7 : COL07
 *color15: COL15
@@ -81,6 +96,18 @@
 ! ####################
 ! ####################
 ! ####################
+
+*.font:				xft:dejavu sans mono:size=10,style=regular
+!*.font:				xft:fira code:pixelsize=14
+
+!*.boldFont:			xft:inconsolata:size=18,style=bold
+
+!Xft.dpi:	96
+Xft.antialias:	true
+Xft.rgba:	none
+Xft.hinting:	true
+Xft.hintstyle:	hintfull
+Xft.lcdfilter:	lcddefault
 
 
 ! ----// URXVT \\----
@@ -118,9 +145,9 @@ URxvt.tintColor:                      #FF0000
 ! URxvt.tripleclickwords:               boolean
 ! URxvt.insecure:                       boolean
 ! URxvt.cursorUnderline:                boolean
-! URxvt.cursorBlink:                    boolean
+! URxvt.cursorBlink<<:                    boolean
 ! URxvt.pointerBlank:                   boolean
-URxvt.background:                     [70]actBackground
+URxvt.background:                     [90]actBackground
 ! URxvt.foreground:                     color
 ! URxvt.color0:                         color
 ! URxvt.color1:                         color
@@ -153,8 +180,7 @@ URxvt.background:                     [70]actBackground
 ! URxvt.pointerColor2:                  color
 ! URxvt.borderColor:                    color
 ! URxvt.iconFile:                       file
-URxvt.font:                           -*-inconsolata-medium-*-*-*-12-*-*-*-*-*-*-*
-URxvt.boldFont:                       -*-inconsolata-bold-*-*-*-12-*-*-*-*-*-*-*
+!URxvt.boldFont:                       -*-dejavu sans condensed-bold-r-*-12-*-*-*-*-*-iso10646-*
 ! URxvt.italicFont:                     fontname
 ! URxvt.boldItalicFont:                 fontname
 ! URxvt.intensityStyles:                boolean
@@ -175,7 +201,7 @@ URxvt.externalBorder:                 5
 !URxvt.internalBorder:                 20
 ! URxvt.borderLess:                     boolean
 URxvt.lineSpace:                      3
-! URxvt.letterSpace:                    number
+!URxvt.letterSpace:                    -5
 ! URxvt.skipBuiltinGlyphs:              boolean
 ! URxvt.pointerBlankDelay:              number
 ! URxvt.backspacekey:                   string
@@ -232,7 +258,6 @@ URxvt.url-launcher:                   firefox
 
 
 
-
 ! --- xTerm config ---
 XTerm.termName: xterm-256color
 XTerm*faceName: inconsolata
@@ -272,3 +297,4 @@ XTerm.vt100.backarrowKey: false
 XTerm.ttyModes: erase ^?
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
+
