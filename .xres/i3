@@ -1,0 +1,11 @@
+! ~/.xres/i3
+
+i3wm.actFG:  COLFG
+i3wm.actBG:  COLBG
+i3wm.actBD:  COLFG
+i3wm.inaFG:  COL07
+i3wm.inaBG:  COL00
+i3wm.inaBD:  COL08
+i3wm.urgFG:  COL09
+i3wm.urgBG:  COL08
+i3wm.urgBD:  COL01
