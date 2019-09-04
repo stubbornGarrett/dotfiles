@@ -9,6 +9,7 @@
 set $mod Mod4
 set $term urxvt
 set $browser firefox
+set $compositor xcompmgr
 set $output Virtual-1
 set $wallpaper /home/garrett/Pictures/wallpaper.jpg
 #set $resolution 1920x1080
@@ -23,17 +24,22 @@ bindsym $mod+Shift+r restart
 
 # --- COLOR THEME - BEGINN ---
 
-set_from_resource $actfg i3wm.foreground  #FFCC00
-set_from_resource $actbg i3wm.background  #222299
-set_from_resource $inafg i3wm.color7      #CCFF00
-set_from_resource $inabg i3wm.color8      #555599
+set_from_resource $actfg i3wm.actFG  #FFFF00
+set_from_resource $actbg i3wm.actBG  #FFFF00
+set_from_resource $actbd i3wm.actBD  #FFFF00
+set_from_resource $inafg i3wm.inaFG  #FFFF00
+set_from_resource $inabg i3wm.inaBG  #FFFF00
+set_from_resource $inabd i3wm.inaBD  #FFFF00
+set_from_resource $urgfg i3wm.urgFG  #FFFF00
+set_from_resource $urgbg i3wm.urgBG  #FFFF00
+set_from_resource $urgbd i3wm.urgBD  #FFFF00
 
-#class                    border  bckrnd text    indic.  ch_brdr
-client.focused            $actfg  $actbg $actfg  $actfg  $actfg
-client.focused_inactive   $inabg  $inabg $inafg  $inafg  $inafg
-client.unfocused          $inabg  $inabg $inafg  $inafg  $inafg
-client.urgent             #CC0000 $actfg $actfg  #CC0000 #CC0000
-client.placeholder        $inabg  $inabg inafg   $actfg  $inabg
+#class                    border  bckrnd  text    indic.  ch_brdr
+client.focused            $actbd  $actbg  $actfg  $actbd  $actbd
+client.focused_inactive   $inabd  $inabg  $inafg  $inabd  $inabd
+client.unfocused          $inabd  $inabg  $inafg  $inabd  $inabd
+client.urgent             $urgbd  $urgfg  $urgfg  $urgbg  $urgbd
+client.placeholder        $inabd  $inabg  $inafg  $actbd  $inabd
 
 client.background         $actbg
 
@@ -103,9 +109,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+b split h
-# split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+t split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -151,31 +155,13 @@ mode "move" {
 # --- FLOATING WINDOWS - END ---
 
 
-# RESIZE MODE - BEGINN
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# RESIZE WINDOWS - BEGINN
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width       10 px or 2 ppt
-        bindsym k resize grow height        10 px or 2 ppt
-        bindsym l resize shrink height      10 px or 2 ppt
-        bindsym semicolon resize grow width 10 px or 2 ppt
+bindsym $mod+y resize shrink width   10 px or 2 ppt
+bindsym $mod+u resize grow height    10 px or 2 ppt
+bindsym $mod+i resize shrink height  10 px or 2 ppt
+bindsym $mod+o resize grow width     10 px or 2 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width    10 px or 2 ppt
-        bindsym Down resize grow height     10 px or 2 ppt
-        bindsym Up resize shrink height     10 px or 2 ppt
-        bindsym Right resize grow width     10 px or 2 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+r mode "resize"
 # RESIZE MODE - END
 
 # --- WORKSPACE SETTINGS - BEGINN ---
@@ -255,20 +241,30 @@ bar {
   height 23
 
   colors {
-    background #4800c433
-    statusline #ffffffff
+  	set_from_resource $barBG i3status.barBG #FFFF00
+  	set_from_resource $barFG i3status.barFG #FFFF00
+    background $barBG
+    statusline $barFG
 
-    separator  #666666ff
+  	set_from_resource $barSP i3status.barSP #FFFF00
+    separator  $barSP
+	
+	
+	set_from_resource $bactfg i3status.actFG  #FFFF00
+	set_from_resource $bactbg i3status.actBG  #FFFF00
+	set_from_resource $bactbd i3status.actBD  #FFFF00
+	set_from_resource $binafg i3status.inaFG  #FFFF00
+	set_from_resource $binabg i3status.inaBG  #FFFF00
+	set_from_resource $binabd i3status.inaBD  #FFFF00
+	set_from_resource $burgfg i3status.urgFG  #FFFF00
+	set_from_resource $burgbg i3status.urgBG  #FFFF00
+	set_from_resource $burgbd i3status.urgBD  #FFFF00
 
-    set_from_resource $urgfg i3wm.color1 #ffffff
-    set_from_resource $urgbg i3wm.color0 #000000
-    set_from_resource $urgbd i3wm.color1 #ff00ff
-
-    #class             border  bckrnd  text
-    focused_workspace  $actfg  $actbg  $actfg
-    active_workspace   $actfg  $actbg  $actfg
-    inactive_workspace $inafg  $inabg  $inafg
-    urgent_workspace   $urgfg  $urgbg  $urgfg
+    #class             border   bckrnd   text
+    focused_workspace  $bactbd  $bactbg  $bactfg
+    active_workspace   $bactbd  $bactbg  $bactfg
+    inactive_workspace $binabd  $binabg  $binafg
+    urgent_workspace   $burgbd  $burgbg  $burgfg
   }  
 }
 # --- i3status SETTINGS - END ---
@@ -290,7 +286,7 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+o exec "dm-tool switch-to-greeter"
+bindsym $mod+b exec "dm-tool switch-to-greeter"
 
 exec --no-startup-id xset dpms 300
 # --- SYSTEM MODE - END ---
@@ -328,10 +324,10 @@ bindsym XF86AudioPrev exec playerctl previous
 
 
 # --- DEFAULT EXECUTIONS ---
-exec --no-startup-id i3-msg 'workspace $ws8; exec $term -e gotop'
+exec --no-startup-id i3-msg 'workspace $ws8; exec $term -e gotop -b; workspace $ws1'
 exec --no-startup-id i3-msg 'workspace $ws1; exec $term; exec $term -e ranger'
 exec --no-startup-id $browser
-exec --no-startup-id xcompmgr
+exec --no-startup-id $compositor
 exec_always --no-startup-id feh --bg-fill $wallpaper
 exec_always --no-startup-id xrandr --output $output --mode $resolution
 
