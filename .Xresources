@@ -1,72 +1,37 @@
-#define actForeground #03ff00
-#define actBackground #050a05
-#define inaForeground #88AA88
-#define inaBackground #000000
-#define actBorder     #55AA55
-#define inaBorder     #111111
-!! black
-#define COL00 #000000
-#define COL08 #111111
-!! red
-#define COL01 #ac0033
-#define COL09 #bd0044
-!! green
-#define COL02 #00ee1e
-#define COL10 #00ff2f
-!! yellow
-#define COL03 #c1c122
-#define COL11 #e2e233
-!! blue
-#define COL04 #4f4fff
-#define COL12 #2200ff
-!! magenta
-#define COL05 #c500ee
-#define COL13 #d600ff
-!! cyan
-#define COL06 #00a7ee
-#define COL14 #00b8ff
-!! white
-#define COL07 #bababa
-#define COL15 #fafafa
+! ~/.Xresources
 
-!#define actForeground #03ff00
-!#define actBackground #021300
-!#define inaForeground #88AA88
-!#define inaBackground #000000
-!#define actBorder     #55AA55
-!#define inaBorder     #111111
-!! black
-!#define COL00 #111111
-!#define COL08 #191919
-!! red
-!#define COL01 #AF0000
-!#define COL09 #880000
-!! green
-!#define COL02 #2b7b00
-!#define COL10 #25eb00
-!! yellow
-!#define COL03 #aba000
-!#define COL11 #e2e300
-!! blue
-!#define COL04 #5544F8
-!#define COL12 #726bf6
-!! magenta
-!#define COL05 #8e00bf
-!#define COL13 #c300ff
-!! cyan
-!#define COL06 #14a0aa
-!#define COL14 #00efe0
-!! white
-!#define COL07 #bababa
-!#define COL15 #fafafa
 
-! ####################
-! #######COLORS#######
-! ####################
+! ------ VARIABLES ------
 
-*.foreground:  actForeground
-*.background:  actBackground
-*.cursorColor: COL13
+#define defaultWebbrowser firefox
+
+#define defaultFontSize	17
+!#define defaultFont 	-*-dejavu sans mono-medium-r-normal-*-14-*-100-100-*-*-*-1
+!#define defaultFont 	xft:dejavu sans mono:pixelsize=14
+!#define defaultFont 	xft:inconsolata:pixelsize=defaultFontSize
+#define defaultFont xft:MONOSPACE-11:MEDIUM
+
+
+! ------ COLOR THEME ------
+! ONLY ONE ACTIVE AT A TIME
+! -------------------------
+!#include ".xres/color/RGB"
+#include ".xres/color/Alien"
+!#include ".xres/color/Cyberpunk"
+
+
+! ------ MODULES ------
+#include ".xres/urxvt"
+#include ".xres/i3"
+#include ".xres/i3status"
+#include ".xres/xterm"
+
+
+! ------ COLORS ------
+
+*foreground:  COLFG
+*background:  COLBG
+*cursorColor: COLCR
 
 !! black
 *color0 : COL00
@@ -93,208 +58,16 @@
 *color7 : COL07
 *color15: COL15
 
-! ####################
-! ####################
-! ####################
 
-*.font:				xft:dejavu sans mono:size=10,style=regular
-!*.font:				xft:fira code:pixelsize=14
 
-!*.boldFont:			xft:inconsolata:size=18,style=bold
+! ------ FONTS ------
 
-!Xft.dpi:	96
+*.font:				defaultFont
+
+Xft.dpi:		96
 Xft.antialias:	true
-Xft.rgba:	none
+Xft.rgba:		none
 Xft.hinting:	true
 Xft.hintstyle:	hintfull
 Xft.lcdfilter:	lcddefault
-
-
-! ----// URXVT \\----
-! URxvt.termName:                       string
-! URxvt.geometry:                       geometry
-! URxvt.chdir:                          string
-! URxvt.reverseVideo:                   boolean
-! URxvt.loginShell:                     boolean
-! URxvt.multiClickTime:                 number
-! URxvt.jumpScroll:                     boolean
-URxvt.skipScroll:                     false
-! URxvt.pastableTabs:                   boolean
-URxvt.scrollstyle:                    rxvt plain
-URxvt.scrollBar:                      false
-URxvt.scrollBar_right:                true
-URxvt.scrollBar_floating:             true
-! URxvt.scrollBar_align:                mode
-URxvt.thickness:                      1
-URxvt.scrollTtyOutput:                false
-URxvt.scrollTtyKeypress:              true
-! URxvt.scrollWithBuffer:               boolean
-! URxvt.inheritPixmap:                  boolean
-!URxvt.transparent:                    true
-URxvt.tintColor:                      #FF0000
-! URxvt.shading:                        number
-! URxvt.blurRadius:                     HxV
-! URxvt.fading:                         number
-! URxvt.fadeColor:                      color
-! URxvt.utmpInhibit:                    boolean
-! URxvt.urgentOnBell:                   boolean
-! URxvt.visualBell:                     boolean
-! URxvt.mapAlert:                       boolean
-! URxvt.meta8:                          boolean
-! URxvt.mouseWheelScrollPage:           boolean
-! URxvt.tripleclickwords:               boolean
-! URxvt.insecure:                       boolean
-! URxvt.cursorUnderline:                boolean
-! URxvt.cursorBlink<<:                    boolean
-! URxvt.pointerBlank:                   boolean
-URxvt.background:                     [90]actBackground
-! URxvt.foreground:                     color
-! URxvt.color0:                         color
-! URxvt.color1:                         color
-! URxvt.color2:                         color
-! URxvt.color3:                         color
-! URxvt.color4:                         color
-! URxvt.color5:                         color
-! URxvt.color6:                         color
-! URxvt.color7:                         color
-! URxvt.color8:                         color
-! URxvt.color9:                         color
-! URxvt.color10:                        color
-! URxvt.color11:                        color
-! URxvt.color12:                        color
-! URxvt.color13:                        color
-! URxvt.color14:                        color
-! URxvt.color15:                        color
-! URxvt.colorBD:                        color
-! URxvt.colorIT:                        color
-! URxvt.colorUL:                        color
-! URxvt.colorRV:                        color
-! URxvt.underlineColor:                 color
-! URxvt.scrollColor:                    color
-! URxvt.troughColor:                    color
-! URxvt.highlightColor:                 color
-! URxvt.highlightTextColor:             color
-! URxvt.cursorColor:                    color
-! URxvt.cursorColor2:                   color
-! URxvt.pointerColor:                   color
-! URxvt.pointerColor2:                  color
-! URxvt.borderColor:                    color
-! URxvt.iconFile:                       file
-!URxvt.boldFont:                       -*-dejavu sans condensed-bold-r-*-12-*-*-*-*-*-iso10646-*
-! URxvt.italicFont:                     fontname
-! URxvt.boldItalicFont:                 fontname
-! URxvt.intensityStyles:                boolean
-! URxvt.inputMethod:                    name
-! URxvt.preeditType:                    style
-! URxvt.imLocale:                       string
-! URxvt.imFont:                         fontname
-URxvt.title:                          URxvt
-! URxvt.iconName:                       string
-URxvt.saveLines:                      16384
-URxvt.buffered:                       true
-URxvt.depth:                          32
-! URxvt.visual:                         number
-! URxvt.transient-for:                  windowid
-! URxvt.override-redirect:              boolean
-! URxvt.hold:                           boolean
-URxvt.externalBorder:                 5
-!URxvt.internalBorder:                 20
-! URxvt.borderLess:                     boolean
-URxvt.lineSpace:                      3
-!URxvt.letterSpace:                    -5
-! URxvt.skipBuiltinGlyphs:              boolean
-! URxvt.pointerBlankDelay:              number
-! URxvt.backspacekey:                   string
-! URxvt.deletekey:                      string
-! URxvt.print-pipe:                     string
-! URxvt.modifier:                       modifier
-! URxvt.cutchars:                       string
-! URxvt.answerbackString:               string
-! URxvt.secondaryScreen:                boolean
-! URxvt.secondaryScroll:                boolean
-! URxvt.perl-lib:                       string
-! URxvt.perl-eval:                      perl-eval
-URxvt.perl-ext-common:                default,matcher,resize-font,url-select,keyboard-select
-URxvt.resize-font.smaller:	      C-u
-URxvt.resize-font.bigger:	      C-i
-! URxvt.perl-ext:                       string
-! URxvt.iso14755:                       boolean
-! URxvt.iso14755_52:                    boolean
-! URxvt.xrm:                            string
-! URxvt.keysym.sym:                     keysym
-! URxvt.background.border:              boolean
-! URxvt.background.expr:                string
-! URxvt.background.interval:            seconds
-! URxvt.bell-command:                   string
-! URxvt.kuake.hotkey:                   string
-! URxvt.matcher.button:                 string
-! URxvt.matcher.launcher:               string
-! URxvt.matcher.launcher.*:             string
-! URxvt.matcher.pattern.*:              string
-! URxvt.matcher.rend.*:                 string
-! URxvt.remote-clipboard.fetch:         string
-! URxvt.remote-clipboard.store:         string
-! URxvt.searchable-scrollback:          string
-! URxvt.selection-autotransform.*:      string
-! URxvt.selection-pastebin.cmd:         string
-! URxvt.selection-pastebin.url:         string
-! URxvt.selection.pattern-0:            string
-! URxvt.tab-bg:                         colour
-! URxvt.tab-fg:                         colour
-! URxvt.tabbar-bg:                      colour
-! URxvt.tabbar-fg:                      colour
-URxvt.url-launcher:                   firefox
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-! --- xTerm config ---
-XTerm.termName: xterm-256color
-XTerm*faceName: inconsolata
-XTerm*faceSize: 11
-XTerm*saveLines: 16384
-XTerm*pointerColor           : #BB00BB
-XTerm*pointerColorBackground : #111111
-XTerm*cursorColor            : #BB00BB
-XTerm*cursorBlink            : true
-
-XTerm.foreground: actForeground
-XTerm.background: actBackground
-
-xterm*faceSize1: 8
-xterm*faceSize2: 10
-xterm*faceSize3: 12
-xterm*faceSize4: 16
-xterm*faceSize5: 22
-XTerm.vt100.locale: true
-
-XTerm*highlightSelection: true
-XTerm*trimSelection: true
-XTerm*scrollTtyOutput: false
-XTerm.vt100.translations: #override \n\
-  Ctrl <Key> minus: smaller-vt-font() \n\
-  Ctrl <Key> plus: larger-vt-font() \n\
-  Ctrl <Key> 0: set-vt-font(d) \n\
-  Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
-  Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
-  Shift <Btn1Up>: exec-formatted("xdg-open '%t'", PRIMARY) \n\
-  <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
-  <Btn2Up>: insert-selection(PRIMARY)
-XTerm*selectToClipboard: true
-XTerm*fullscreen: never
-XTerm*metaSendsEscape: true
-XTerm.vt100.backarrowKey: false
-XTerm.ttyModes: erase ^?
-XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
-XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
 
