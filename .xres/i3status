@@ -1,0 +1,15 @@
+! ~/.xres/i3status
+
+i3status.actFG:  COLFG
+i3status.actBG:  COLBG
+i3status.actBD:  COLFG
+i3status.inaFG:  COL07
+i3status.inaBG:  COL00
+i3status.inaBD:  COL08
+i3status.urgFG:  COL09
+i3status.urgBG:  COL08
+i3status.urgBD:  COL01
+
+i3status.barBG:	#4800c433
+i3status.barFG: #ffffffff
+i3status.barSP: #666666ff
