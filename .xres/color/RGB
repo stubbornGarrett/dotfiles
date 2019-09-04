@@ -1,0 +1,30 @@
+! ~/.xres/color/RGB
+
+#define COLFG #FFFFFF
+#define COLBG #000000
+#define COLCR #AAAAAA
+! black
+#define COL00 #000000
+#define COL08 #101010
+! red
+#define COL01 #EE0000
+#define COL09 #FF0000
+! green
+#define COL02 #00EE00
+#define COL10 #00FF00
+! yellow
+#define COL03 #EEEE00
+#define COL11 #FFFF00
+! blue
+#define COL04 #0000EE
+#define COL12 #0000FF
+! magenta
+#define COL05 #EE00EE
+#define COL13 #FF00FF
+! cyan
+#define COL06 #00EEEE
+#define COL14 #00FFFF
+! white
+#define COL07 #EEEEEE
+#define COL15 #FFFFFF
+
