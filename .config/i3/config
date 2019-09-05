@@ -7,7 +7,7 @@
 
 # Variables -----------------------------------------
 set $mod Mod4
-set $term urxvt
+set $terminal urxvt
 set $browser firefox
 set $compositor xcompmgr
 set $output Virtual-1
@@ -72,7 +72,7 @@ smart_borders on
 font pango:inconsolata 11
 
 # start a terminl
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -169,14 +169,14 @@ bindsym $mod+o resize grow width     10 px or 2 ppt
 workspace_layout default
 
 set $ws1 "1: "
-set $ws2 "2: "
-set $ws3 "3: "
+set $ws2 "2: -"
+set $ws3 "3: -"
 set $ws4 "4: -"
-set $ws5 "5: -"
-set $ws6 "6: -"
+set $ws5 "5: "
+set $ws6 "6: "
 set $ws7 "7: -"
 set $ws8 "8: "
-set $ws9 "9: VM"
+set $ws9 "9: "
 set $ws10 "10: "
 
 workspace $ws1 output $output
@@ -216,10 +216,10 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 
 # Default workspace for applications
-assign [class="$browser"] $ws2
-assign [class="chromium"] $ws2
-assign [class="Gimp"] $ws3
-assign [class="Blender"] $ws3
+assign [class="$browser"] $ws5
+assign [class="chromium"] $ws5
+assign [class="Gimp"] $ws6
+assign [class="Blender"] $ws6
 
 # --- WORKSPACE SETTINGS - END ---
 
@@ -286,13 +286,13 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+b exec "dm-tool switch-to-greeter"
+bindsym $mod+c exec "dm-tool switch-to-greeter"
 
 exec --no-startup-id xset dpms 300
 # --- SYSTEM MODE - END ---
 
 
-# --- MEDIA KEYS - BEGINN ---
+# --- FUNCTION KEYS - BEGINN ---
 
 # https://faq.i3wm.org/question/3747/enabling-multimedia-keys/?answer=3759#post-id-3759
 # https://wiki.archlinux.org/index.php/PulseAudio
@@ -320,12 +320,12 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# --- MEDIA KEYS - END ---
+# --- FUNCTION KEYS - END ---
 
 
 # --- DEFAULT EXECUTIONS ---
-exec --no-startup-id i3-msg 'workspace $ws8; exec $term -e gotop -b; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws1; exec $term; exec $term -e ranger'
+exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -e gotop -b; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal; exec $terminal -e ranger'
 exec --no-startup-id $browser
 exec --no-startup-id $compositor
 exec_always --no-startup-id feh --bg-fill $wallpaper
