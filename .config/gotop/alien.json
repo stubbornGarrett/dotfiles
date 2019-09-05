@@ -1,0 +1,23 @@
+{
+	"Fg": 15,
+	"Bg": -1,
+
+	"BorderLabel": 83,
+	"BorderLine":  46,
+
+	"CPULines": [46, 51, 40, 44, 34, 38, 28, 33],
+
+	"BattLines": [46, 51, 40, 44, 34, 38, 28, 33],
+
+	"MainMem": 83,
+	"SwapMem": 51,
+
+	"ProcCursor": 51,
+
+	"Sparkline": 51,
+
+	"DiskBar": 15,
+
+	"TempLow":  51,
+	"TempHigh": 160
+}
