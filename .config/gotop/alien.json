@@ -2,22 +2,22 @@
 	"Fg": 15,
 	"Bg": -1,
 
-	"BorderLabel": 83,
-	"BorderLine":  46,
+	"BorderLabel": 10,
+	"BorderLine":  2,
 
-	"CPULines": [46, 51, 40, 44, 34, 38, 28, 33],
+	"CPULines": [10, 14, 2, 6, 10, 14, 2, 6],
 
-	"BattLines": [46, 51, 40, 44, 34, 38, 28, 33],
+	"BattLines": [10, 14, 2, 6, 10, 14, 2, 6],
 
-	"MainMem": 83,
-	"SwapMem": 51,
+	"MainMem": 14,
+	"SwapMem": 6,
 
-	"ProcCursor": 51,
+	"ProcCursor": 2,
 
-	"Sparkline": 51,
+	"Sparkline": 4,
 
 	"DiskBar": 15,
 
-	"TempLow":  51,
-	"TempHigh": 160
+	"TempLow":  4,
+	"TempHigh": 9
 }
