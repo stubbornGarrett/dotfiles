@@ -324,7 +324,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 
 # --- DEFAULT EXECUTIONS ---
-exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -e gotop -b --color=alien; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -e gotop; workspace $ws1'
 exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal; exec $terminal -e ranger'
 exec --no-startup-id $browser
 exec --no-startup-id $compositor
