@@ -14,12 +14,15 @@ set $output Virtual-1
 set $wallpaper /home/garrett/Pictures/wallpaper.jpg
 #set $resolution 1920x1080
 set $resolution 1680x1050
+
+set $defaultFont pango:inconsolata 11
+set $barFont pango:DejaVu Sans Mono 11
 # ---------------------------------------------------
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+#bindsym $mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+#bindsym $mod+Shift+r restart
 
 
 # --- COLOR THEME - BEGINN ---
@@ -64,12 +67,10 @@ smart_borders on
 
 
 
-
-
 # --- BASIC SETTINGS - BEGINN ---
 
 # Default font
-font pango:inconsolata 11
+font $defaultFont
 
 # start a terminl
 bindsym $mod+Return exec $terminal
@@ -92,10 +93,10 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -103,12 +104,18 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+#bindsym $mod+Shift+Left move left
+#bindsym $mod+Shift+Down move down
+#bindsym $mod+Shift+Up move up
+#bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+# resize window
+bindsym $mod+y resize shrink width   10 px or 2 ppt
+bindsym $mod+u resize grow height    10 px or 2 ppt
+bindsym $mod+i resize shrink height  10 px or 2 ppt
+bindsym $mod+o resize grow width     10 px or 2 ppt
+
+# toggle split orientation
 bindsym $mod+t split toggle
 
 # enter fullscreen mode for the focused container
@@ -120,6 +127,27 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # --- BASIC SETTINGS - END ---
+
+
+
+# --- SCRATCHPAD - BEGINN ---
+
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] border pixel 3
+for_window [instance="dropdown_*"] move position center
+
+for_window [instance="dropdown_console"] resize set 700 500 
+for_window [instance="dropdown_calculator"] resize set 550 500 
+
+bindsym $mod+c 		[instance="dropdown_console"] scratchpad show; [instance="dropdown_console"] move position center
+bindsym $mod+Shift+c 	[instance="dropdown_calculator"] scratchpad show; [instance="dropdown_calculator"] move position center
+
+exec --no-startup-id $terminal -name dropdown_console
+exec --no-startup-id $terminal -name dropdown_calculator -fn "xft:mono:pixelsize=24" -e python -q
+
+# --- SCRATCHPAD - END ---
+
 
 
 # --- FLOATING WINDOWS - BEGINN ---
@@ -155,14 +183,6 @@ mode "move" {
 # --- FLOATING WINDOWS - END ---
 
 
-# RESIZE WINDOWS - BEGINN
-
-bindsym $mod+y resize shrink width   10 px or 2 ppt
-bindsym $mod+u resize grow height    10 px or 2 ppt
-bindsym $mod+i resize shrink height  10 px or 2 ppt
-bindsym $mod+o resize grow width     10 px or 2 ppt
-
-# RESIZE MODE - END
 
 # --- WORKSPACE SETTINGS - BEGINN ---
 
@@ -214,7 +234,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-
 # Default workspace for applications
 assign [class="$browser"] $ws5
 assign [class="chromium"] $ws5
@@ -226,14 +245,15 @@ assign [class="Blender"] $ws6
 
 
 # --- i3status SETTINGS - BEGINN ---
+
 bar {
-  font pango:DejaVu Sans Mono 11
+  font $barFont
   status_command i3status
   i3bar_command i3bar --transparency
   output $output
   position bottom
   tray_output $output
-  tray_padding 5
+  tray_padding 4
   separator_symbol "|"
   workspace_buttons yes
   strip_workspace_numbers yes
@@ -241,24 +261,24 @@ bar {
   height 23
 
   colors {
-  	set_from_resource $barBG i3status.barBG #FFFF00
-  	set_from_resource $barFG i3status.barFG #FFFF00
+    set_from_resource $barBG i3status.barBG #FFFF00
+    set_from_resource $barFG i3status.barFG #FFFF00
     background $barBG
     statusline $barFG
 
-  	set_from_resource $barSP i3status.barSP #FFFF00
+    set_from_resource $barSP i3status.barSP #FFFF00
     separator  $barSP
-	
-	
-	set_from_resource $bactfg i3status.actFG  #FFFF00
-	set_from_resource $bactbg i3status.actBG  #FFFF00
-	set_from_resource $bactbd i3status.actBD  #FFFF00
-	set_from_resource $binafg i3status.inaFG  #FFFF00
-	set_from_resource $binabg i3status.inaBG  #FFFF00
-	set_from_resource $binabd i3status.inaBD  #FFFF00
-	set_from_resource $burgfg i3status.urgFG  #FFFF00
-	set_from_resource $burgbg i3status.urgBG  #FFFF00
-	set_from_resource $burgbd i3status.urgBD  #FFFF00
+
+
+    set_from_resource $bactfg i3status.actFG  #FFFF00
+    set_from_resource $bactbg i3status.actBG  #FFFF00
+    set_from_resource $bactbd i3status.actBD  #FFFF00
+    set_from_resource $binafg i3status.inaFG  #FFFF00
+    set_from_resource $binabg i3status.inaBG  #FFFF00
+    set_from_resource $binabd i3status.inaBD  #FFFF00
+    set_from_resource $burgfg i3status.urgFG  #FFFF00
+    set_from_resource $burgbg i3status.urgBG  #FFFF00
+    set_from_resource $burgbd i3status.urgBD  #FFFF00
 
     #class             border   bckrnd   text
     focused_workspace  $bactbd  $bactbg  $bactfg
@@ -267,6 +287,7 @@ bar {
     urgent_workspace   $burgbd  $burgbg  $burgfg
   }  
 }
+
 # --- i3status SETTINGS - END ---
 
 
@@ -286,7 +307,7 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+c exec "dm-tool switch-to-greeter"
+bindsym $mod+x exec "dm-tool switch-to-greeter"
 
 exec --no-startup-id xset dpms 300
 # --- SYSTEM MODE - END ---
@@ -324,7 +345,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 
 # --- DEFAULT EXECUTIONS ---
-exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -e gotop; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -e gotop -b --color=alien; workspace $ws1'
 exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal; exec $terminal -e ranger'
 exec --no-startup-id $browser
 exec --no-startup-id $compositor
