@@ -2,7 +2,7 @@
 
 #define COLFG #00ef00
 #define COLBG #102510
-#define COLCR #FF00FF
+#define COLCR #00ef00
 ! black
 #define COL00 #000000
 #define COL08 #101010
