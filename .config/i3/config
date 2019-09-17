@@ -20,9 +20,9 @@ set $barFont pango:DejaVu Sans Mono 11
 # ---------------------------------------------------
 
 # reload the configuration file
-#bindsym $mod+r reload
+bindsym $mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-#bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r restart
 
 
 # --- COLOR THEME - BEGINN ---
@@ -62,6 +62,9 @@ gaps inner  5
 gaps outer  1
 smart_gaps    on
 smart_borders on
+
+for_window [class="URxvt"] border normal 1
+for_window [class="URxvt"] title_format "<span font='Inconsolata 10'> %title</span>
 
 # --- WINDOWS LAYOUT - END ---
 
@@ -346,7 +349,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # --- DEFAULT EXECUTIONS ---
 exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -e gotop -b --color=alien; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal; exec $terminal -e ranger'
+exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal; exec $terminal -title Ranger -e ranger'
 exec --no-startup-id $browser
 exec --no-startup-id $compositor
 exec_always --no-startup-id feh --bg-fill $wallpaper
