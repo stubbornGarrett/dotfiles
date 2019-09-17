@@ -20,9 +20,16 @@ URxvt.scrollTtyOutput:                false
 URxvt.scrollTtyKeypress:              true
 URxvt.lineSpace:                      3
 URxvt.perl-ext-common:                default,matcher,resize-font,url-select,keyboard-select
+URxvt.url-launcher:                   defaultWebbrowser
+URxvt.cursorUnderline:                true
+URxvt.cursorBlink:                    true
+
+! ------ KEYBINDS ------
+
+URxvt.keysym.Shift-Up: 				  command:\033]720;1\007
+URxvt.keysym.Shift-Down:              command:\033]721;1\007
 URxvt.resize-font.smaller:	      	  C-u
 URxvt.resize-font.bigger:	          C-i
-URxvt.url-launcher:                   defaultWebbrowser
 
 ! ------ UNUSED ------
 
@@ -84,8 +91,6 @@ URxvt.url-launcher:                   defaultWebbrowser
 ! URxvt.mouseWheelScrollPage:           boolean
 ! URxvt.tripleclickwords:               boolean
 ! URxvt.insecure:                       boolean
-! URxvt.cursorUnderline:                boolean
-! URxvt.cursorBlink<<:                    boolean
 ! URxvt.pointerBlank:                   boolean
 ! URxvt.iconFile:                       file
 ! URxvt.font:                           fontname
