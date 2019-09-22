@@ -17,7 +17,6 @@
 ! -------------------------
 !#include ".xres/color/RGB"
 #include ".xres/color/Alien"
-!#include ".xres/color/Cyberpunk"
 
 
 ! ------ MODULES ------
