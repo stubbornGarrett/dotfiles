@@ -19,7 +19,7 @@ order += "volume"
 order += "tztime local"
 order += "tztime berlin"
 
-wireless wlan0 {
+wireless wlp5s0 {
   format_up = "(%quality at %essid, %bitrate) %ip"
   format_down = "down"
 }
@@ -34,7 +34,7 @@ battery 0 {
   integer_battery_capacity = true
   format_down = "n/f"
   status_chr = ""
-  status_bat = "🔋"
+  status_bat = ""
   status_unk = ""
   status_full = ""
   path = "/sys/class/power_supply/BAT%d/uevent"

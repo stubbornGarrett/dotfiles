@@ -9,9 +9,10 @@
 set $mod Mod4
 set $terminal urxvt
 set $browser firefox
+set $musicplayer cmus
 set $compositor xcompmgr
 set $output eDP-1
-set $wallpaper /home/garrett/Pictures/wallpaper.jpg
+set $wallpaper /home/garrett/Library/Pictures/wallpaper.jpg
 set $resolution 1920x1080
 
 set $defaultFont pango:inconsolata 11
@@ -57,7 +58,7 @@ default_border pixel 1
 default_floating_border pixel 2
 hide_edge_borders none
 
-gaps inner  1
+gaps inner  4
 gaps outer  0
 smart_gaps    on
 smart_borders on
@@ -83,6 +84,9 @@ bindsym $mod+q       kill
 
 # start dmenu
 bindsym $mod+d exec dmenu_run -b -i -fn inconsolata
+
+# take screenshot
+bindcode --release 99 exec /home/garrett/Scripts/takeFullscreenScreenshot.sh
 
 #focus_follows_mouse yes
 popup_during_fullscreen smart
@@ -349,6 +353,7 @@ bindsym XF86AudioPrev exec playerctl previous
 # --- DEFAULT EXECUTIONS ---
 exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -e gotop -b --color=alien; workspace $ws1'
 exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal; exec $terminal -title Ranger -e ranger'
+exec --no-startup-id i3-msg 'workspace $ws10; exec $musicplayer; workspace $ws1'
 exec --no-startup-id $browser
 exec --no-startup-id $compositor
 exec_always --no-startup-id feh --bg-fill $wallpaper
