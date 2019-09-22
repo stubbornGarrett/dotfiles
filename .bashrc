@@ -10,11 +10,11 @@ PS1='>'
 export PS1
 
 # ALIASES
-alias gotop="gotop --color=alien -b"
-alias ls="ls --color=auto -hN --group-directories-first"
-alias lsa="ls --color=auto -hN --group-directories-first -a"
-alias opdf="mupdf -C 00FF00 -I"
-alias p="sudo pacman"
+alias gotop="/usr/bin/gotop --color=alien -b"
+alias ls="/usr/bin/ls --color=auto -hN --group-directories-first"
+alias lsa="/usr/bin/ls --color=auto -hN --group-directories-first -a"
+alias opdf="/usr/bin/mupdf -C 00FF00 -I"
+alias p="/usr/bin/sudo pacman"
 alias ..="cd .."
-alias c="clear"
-alias calculator="python $HOME/Scripts/calculator.py"
+alias c="/usr/bin/clear"
+alias configgit='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
