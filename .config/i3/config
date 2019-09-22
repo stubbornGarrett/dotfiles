@@ -10,10 +10,9 @@ set $mod Mod4
 set $terminal urxvt
 set $browser firefox
 set $compositor xcompmgr
-set $output Virtual-1
+set $output eDP-1
 set $wallpaper /home/garrett/Pictures/wallpaper.jpg
-#set $resolution 1920x1080
-set $resolution 1680x1050
+set $resolution 1920x1080
 
 set $defaultFont pango:inconsolata 11
 set $barFont pango:DejaVu Sans Mono 11
@@ -58,8 +57,8 @@ default_border pixel 1
 default_floating_border pixel 2
 hide_edge_borders none
 
-gaps inner  5
-gaps outer  1
+gaps inner  1
+gaps outer  0
 smart_gaps    on
 smart_borders on
 
@@ -143,8 +142,8 @@ for_window [instance="dropdown_*"] move position center
 for_window [instance="dropdown_console"] resize set 700 500 
 for_window [instance="dropdown_calculator"] resize set 550 500 
 
-bindsym $mod+c 		[instance="dropdown_console"] scratchpad show; [instance="dropdown_console"] move position center
-bindsym $mod+Shift+c 	[instance="dropdown_calculator"] scratchpad show; [instance="dropdown_calculator"] move position center
+bindsym $mod+c [instance="dropdown_console"] scratchpad show; [instance="dropdown_console"] move position center
+bindsym $mod+Shift+c [instance="dropdown_calculator"] scratchpad show; [instance="dropdown_calculator"] move position center
 
 exec --no-startup-id $terminal -name dropdown_console
 exec --no-startup-id $terminal -name dropdown_calculator -fn "xft:mono:pixelsize=24" -e python -q
