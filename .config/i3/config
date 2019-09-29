@@ -11,11 +11,12 @@ set $terminal urxvt
 set $browser firefox
 set $musicplayer cmus
 set $compositor xcompmgr
-set $output eDP-1
+set $output eDP1
 set $wallpaper /home/garrett/Library/Pictures/wallpaper.jpg
 set $resolution 1920x1080
 
-set $defaultFont pango:inconsolata 11
+#set $defaultFont pango:inconsolata 11
+set $defaultFont pango:monospace 11
 set $barFont pango:DejaVu Sans Mono 11
 # ---------------------------------------------------
 
@@ -199,8 +200,8 @@ set $ws2 "2: 2"
 set $ws3 "3: 3"
 set $ws4 "4: 4"
 set $ws5 "5: "
-set $ws6 "6: "
-set $ws7 "7: -"
+set $ws6 "6: "
+set $ws7 "7: "
 set $ws8 "8: "
 set $ws9 "9: "
 set $ws10 "10: "
@@ -241,10 +242,24 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Default workspace for applications
+# Documents - ws 4
+assign [class="MuPDF"] $ws4
+assign [class="feh"] $ws4
+assign [class="Sxiv"] $ws4
+
+# Browser - ws 5
 assign [class="$browser"] $ws5
 assign [class="chromium"] $ws5
-assign [class="Gimp"] $ws6
-assign [class="Blender"] $ws6
+
+# Game launcher - ws 6
+assign [class="Steam"] $ws6
+
+# Applications - ws 7
+assign [class="Gimp"] $ws7
+assign [class="Blender"] $ws7
+
+# VM - ws 9
+#assign [class="Virt-manager"] $ws2
 
 # --- WORKSPACE SETTINGS - END ---
 
@@ -313,7 +328,7 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+x exec "dm-tool switch-to-greeter"
+bindsym $mod+x exec $HOME/Scripts/lockSession
 
 exec --no-startup-id xset dpms 300
 # --- SYSTEM MODE - END ---
@@ -335,8 +350,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
@@ -351,9 +366,9 @@ bindsym XF86AudioPrev exec playerctl previous
 
 
 # --- DEFAULT EXECUTIONS ---
-exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -e gotop -b --color=alien; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal; exec $terminal -title Ranger -e ranger'
-exec --no-startup-id i3-msg 'workspace $ws10; exec $musicplayer; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal -e vim $HOME/Library/Documents/todo.txt; exec $terminal -title Ranger -e ranger'
+exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -title gotop -e gotop -b --color=alien; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws10; exec $terminal -e $musicplayer; workspace $ws1'
 exec --no-startup-id $browser
 exec --no-startup-id $compositor
 exec_always --no-startup-id feh --bg-fill $wallpaper

@@ -100,7 +100,7 @@ URxvt.resize-font.bigger:	          C-i
 ! URxvt.intensityStyles:                boolean
 ! URxvt.inputMethod:                    name
 ! URxvt.preeditType:                    style
-! URxvt.imLocale:                       string
+URxvt.imLocale:                       en_US.utf8
 ! URxvt.imFont:                         fontname
 ! URxvt.iconName:                       string
 ! URxvt.visual:                         number

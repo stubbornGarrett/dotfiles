@@ -63,10 +63,10 @@
 
 *.font:				defaultFont
 
-Xft.dpi:		96
+Xft.dpi:      	96
 Xft.antialias:	true
-Xft.rgba:		none
+Xft.rgba:	rgb
 Xft.hinting:	true
-Xft.hintstyle:	hintfull
+Xft.hintstyle:	hintslight
 Xft.lcdfilter:	lcddefault
 

@@ -10,44 +10,46 @@ general {
 order += "run_watch DHCP"
 order += "run_watch VPN"
 order += "run_watch VPNC"
-order += "wireless wlan0"
-order += "ethernet eth0"
+order += "wireless wlp5s0"
+order += "ethernet enp4s0"
 order += "cpu_temperature 0"
 order += "cpu_usage"
+order += "memory"
 order += "battery 0"
-order += "volume"
+order += "volume master"
 order += "tztime local"
 order += "tztime berlin"
 
 wireless wlp5s0 {
-  format_up = "(%quality at %essid, %bitrate) %ip"
-  format_down = "down"
+  format_up = "%quality SSID: %essid - %frequency"
+  format_down = ""
+  align = "center"
 }
 
-ethernet eth0 {
+ethernet enp4s0 {
   format_up = "%ip (%speed)"
-  format_down = "down"
+  format_down = ""
 }
 
 battery 0 {
   format = "%status%percentage"
   integer_battery_capacity = true
-  format_down = "n/f"
-  status_chr = ""
-  status_bat = ""
-  status_unk = ""
-  status_full = ""
+  format_down = " n/f"
+  status_chr = " "
+  status_bat = " "
+  status_unk = " "
+  status_full = " "
   path = "/sys/class/power_supply/BAT%d/uevent"
-  low_threshold = 15
+  low_threshold = 20
   threshold_type = "percentage"
-  min_width = 60
+  min_width = 50 
   align = "center"
-  separator =false
 }
 
 
 run_watch DHCP {
   format = "DHCP"
+  format_down = ""
   pidfile = "/var/run/dhcpcd.pid"
 }
 
@@ -55,19 +57,19 @@ run_watch VPNC {
   # file containing the PID of a vpnc process
   pidfile = "/var/run/vpnc/pid"
   format="%title"
-  format_down="%title"
+  format_down=""
 }
 
 path_exists VPN {
   # path exists when a VPN tunnel launched by nmcli/nm-applet is active
   path = "/proc/sys/net/ipv4/conf/tun0"
   format="%title"
-  format_down="%title"
+  format_down=""
 }
 
 
 cpu_usage {
-  format = %usage
+  format = " %usage"
   max_threshold = 90
   degraded_threshold = 75
   min_width = 60
@@ -75,19 +77,22 @@ cpu_usage {
 }
 
 cpu_temperature 0 {
-  format = "%degrees°C"
+  format = " %degrees°C"
   max_threshold = 70
-  path = "/sys/devices/platform/coretemp.0/temp1_input"
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input"
   min_width = 60
   align = "center"
 }
 
 volume master {
-  format = " (%devicename): %volume"
-  format_muted = " (%devicename): (%volume)"
+  format = " %volume"
+  format_muted = " %volume"
   device = "default"
   mixer = "Master"
   mixer_idx = 0
+  separator =false
+  align = "center"
+  min_width = 55 
 }
 
 read_file uptime {
@@ -108,3 +113,8 @@ tztime berlin {
   align = "right"
 }
 
+memory {
+  format = " %percentage_used"
+  threshold_degraded = 50%
+  threshold_critical = 20%
+}

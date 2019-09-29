@@ -1,2 +1,3 @@
 #!/bin/sh
+setxkbmap -option caps:escape
 exec i3

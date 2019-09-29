@@ -1,8 +1,25 @@
 " URL: http://vim.wikia.com/wiki/Example_vimrc
 " Authors: http://vim.wikia.com/wiki/Vim_on_Freenode
 
+"call plug#begin('-/.conf/vim/plugged')
+
+"call plug#end()
+
 set nocompatible
 syntax on
+filetype plugin on
+set encoding=utf-8
+set relativenumber number
+
+set wildmode=longest,list,full
+
+set splitbelow splitright
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
 set hidden
 set ignorecase
 set smartcase
@@ -18,7 +35,6 @@ set visualbell
 set t_vb=
 set mouse=a
 set cmdheight=2
-set relativenumber
 set notimeout ttimeout ttimeoutlen=200
  
 " Use <F11> to toggle between 'paste' and 'nopaste'
@@ -27,7 +43,8 @@ set pastetoggle=<F11>
 set shiftwidth=2
 set softtabstop=2
 set expandtab
- 
+
+vnoremap <C-c> "*y
  
 "------------------------------------------------------------
 " Mappings {{{1
@@ -43,3 +60,9 @@ map Y y$
 nnoremap <C-H> :nohl<CR><C-H>
  
 "------------------------------------------------------------
+
+
+
+" AUTO UPDATE
+
+autocmd BufWritePost ~/.Xresources,~/.xres/* !xrdb ~/.Xresources
