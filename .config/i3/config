@@ -12,16 +12,17 @@ set $browser firefox
 set $musicplayer cmus
 set $compositor xcompmgr
 set $output eDP1
-set $wallpaper /home/garrett/Library/Pictures/wallpaper.jpg
+set $wallpaper /home/garrett/System/DesktopWallpaper.jpg
 set $resolution 1920x1080
 
 #set $defaultFont pango:inconsolata 11
 set $defaultFont pango:monospace 11
-set $barFont pango:DejaVu Sans Mono 11
+#set $barFont pango:DejaVu Sans Mono 11
+set $barFont pango:monospace 11
 # ---------------------------------------------------
 
 # reload the configuration file
-bindsym $mod+r reload
+#bindsym $mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
@@ -84,10 +85,11 @@ bindsym $mod+Shift+q kill
 bindsym $mod+q       kill
 
 # start dmenu
-bindsym $mod+d exec dmenu_run -b -i -fn inconsolata
+bindsym $mod+d exec dmenu_run -b -i -fn "monospace-14" -nb black -nf green -sb green -sf black 
+bindsym $mod+F9 exec --no-startup-id $HOME/Scripts/dmenumount
 
 # take screenshot
-bindcode --release 99 exec /home/garrett/Scripts/takeFullscreenScreenshot.sh
+bindsym Print exec /home/garrett/Scripts/takeFullscreenScreenshot.sh
 
 #focus_follows_mouse yes
 popup_during_fullscreen smart
@@ -200,11 +202,17 @@ set $ws2 "2: 2"
 set $ws3 "3: 3"
 set $ws4 "4: 4"
 set $ws5 "5: "
-set $ws6 "6: "
-set $ws7 "7: "
-set $ws8 "8: "
-set $ws9 "9: "
-set $ws10 "10: "
+set $ws6 "6: "
+set $ws7 "7: 7"
+set $ws8 "8: 8"
+set $ws9 "9: 9"
+set $ws10 "10: 0"
+
+set $wsTaskManager "11: "
+set $wsVM "12: "
+set $wsSteam "20: "
+set $wsDiscord "21: "
+set $wsMusic "100: "
 
 workspace $ws1 output $output
 workspace $ws2 output $output
@@ -216,7 +224,12 @@ workspace $ws7 output $output
 workspace $ws8 output $output
 workspace $ws9 output $output
 workspace $ws10 output $output
-# LVDS1
+
+workspace $wsDiscord output $output
+workspace $wsFiles output $output
+workspace $wsSteam output $output
+workspace $wsDiscord output $output
+workspace $wsMusic output $output
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -228,6 +241,12 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+
+bindsym $mod+Shift+F workspace $wsFiles
+bindsym $mod+Shift+T workspace $wsTaskManager
+bindsym $mod+Shift+S workspace $wsSteam
+bindsym $mod+Shift+D workspace $wsDiscord
+bindsym $mod+Shift+M workspace $wsMusic
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -242,24 +261,29 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Default workspace for applications
-# Documents - ws 4
+# Documents - ws Files
 assign [class="MuPDF"] $ws4
 assign [class="feh"] $ws4
 assign [class="Sxiv"] $ws4
 
-# Browser - ws 5
+# Browser - ws Web
 assign [class="$browser"] $ws5
 assign [class="chromium"] $ws5
 
-# Game launcher - ws 6
-assign [class="Steam"] $ws6
+# Game launcher - ws Steam (Games)
+assign [class="Steam"] $wsSteam
 
 # Applications - ws 7
-assign [class="Gimp"] $ws7
-assign [class="Blender"] $ws7
+#assign [class="Gimp"] $ws7
+#assign [class="Blender"] $ws7
 
-# VM - ws 9
-#assign [class="Virt-manager"] $ws2
+
+assign [class="discord"] $wsDiscord
+
+# VM - ws VM
+#assign [class="Virt-manager"] $wsVM
+assign [title="win10pro on QEMU/KVM"] $wsVM
+assign [title="*on QEMU/KVM"] $wsVM
 
 # --- WORKSPACE SETTINGS - END ---
 
@@ -348,6 +372,7 @@ exec --no-startup-id xset dpms 300
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-sink-input-mute 0 toggle
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
@@ -366,11 +391,12 @@ bindsym XF86AudioPrev exec playerctl previous
 
 
 # --- DEFAULT EXECUTIONS ---
-exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal -e vim $HOME/Library/Documents/todo.txt; exec $terminal -title Ranger -e ranger'
-exec --no-startup-id i3-msg 'workspace $ws8; exec $terminal -title gotop -e gotop -b --color=alien; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws10; exec $terminal -e $musicplayer; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal; exec $terminal -title Ranger -e ranger'
+exec --no-startup-id i3-msg 'workspace $wsTaskManager; exec $terminal -title gotop -e gotop -b --color=alien; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $wsMusic; exec $terminal -e $musicplayer; workspace $ws1'
 exec --no-startup-id $browser
 exec --no-startup-id $compositor
+exec --no-startup-id dropbox
 exec_always --no-startup-id feh --bg-fill $wallpaper
 exec_always --no-startup-id xrandr --output $output --mode $resolution
 

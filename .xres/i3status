@@ -10,6 +10,8 @@ i3status.urgFG:  COL09
 i3status.urgBG:  COL08
 i3status.urgBD:  COL01
 
-i3status.barBG:	#4800c433
+!i3status.barBG:	#4800c4
+!i3status.barBG:	#2800a4aa
+i3status.barBG:	#202020fa
 i3status.barFG: #ffffffff
 i3status.barSP: #666666ff

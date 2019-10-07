@@ -12,6 +12,9 @@ order += "run_watch VPN"
 order += "run_watch VPNC"
 order += "wireless wlp5s0"
 order += "ethernet enp4s0"
+order += "disk /"
+order += "disk /home"
+order += "disk /storage"
 order += "cpu_temperature 0"
 order += "cpu_usage"
 order += "memory"
@@ -117,4 +120,19 @@ memory {
   format = " %percentage_used"
   threshold_degraded = 50%
   threshold_critical = 20%
+}
+
+disk / {
+  format = "/ %percentage_used"
+  format_not_mounted = "impossible..."
+}
+
+disk /home {
+  format = "/home %percentage_used"
+  format_not_mounted = "impossible..."
+}
+
+disk /storage {
+  format = "/storage %percentage_used"
+  format_not_mounted = "/storage disconnected"
 }
