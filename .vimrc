@@ -1,10 +1,6 @@
 " URL: http://vim.wikia.com/wiki/Example_vimrc
 " Authors: http://vim.wikia.com/wiki/Vim_on_Freenode
 
-"call plug#begin('-/.conf/vim/plugged')
-
-"call plug#end()
-
 set nocompatible
 syntax on
 filetype plugin on
@@ -186,4 +182,12 @@ autocmd BufWritePost ~/.Xresources,~/.xres/* !xrdb ~/.Xresources
 """.xml
 	autocmd FileType xml inoremap ,e <item><Enter><title><++></title><Enter><guid<space>isPermaLink="false"><++></guid><Enter><pubDate><Esc>:put<Space>=strftime('%a, %d %b %Y %H:%M:%S %z')<Enter>kJA</pubDate><Enter><link><++></link><Enter><description><![CDATA[<++>]]></description><Enter></item><Esc>?<title><enter>cit
 	autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
+
+
+
+let g:vimtex_view_general_viewer = 'mupdf'
+let g:vimtex_view_general_options
+      \ = '-reuse-instance -forward-search @tex @line @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
 
