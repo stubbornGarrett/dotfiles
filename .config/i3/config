@@ -7,9 +7,11 @@
 
 # Variables -----------------------------------------
 set $mod Mod4
+#set $terminal st
 set $terminal urxvt
 set $browser firefox
-set $musicplayer cmus
+#set $musicplayer cmus
+set $musicplayer deadbeef
 set $compositor xcompmgr
 set $output eDP1
 set $wallpaper /home/garrett/System/DesktopWallpaper.jpg
@@ -30,13 +32,13 @@ bindsym $mod+Shift+r restart
 # --- COLOR THEME - BEGINN ---
 
 set_from_resource $actfg i3wm.actFG  #FFFF00
-set_from_resource $actbg i3wm.actBG  #FFFF00
+set_from_resource $actbg i3wm.actBG  #000000
 set_from_resource $actbd i3wm.actBD  #FFFF00
 set_from_resource $inafg i3wm.inaFG  #FFFF00
-set_from_resource $inabg i3wm.inaBG  #FFFF00
+set_from_resource $inabg i3wm.inaBG  #000000
 set_from_resource $inabd i3wm.inaBD  #FFFF00
 set_from_resource $urgfg i3wm.urgFG  #FFFF00
-set_from_resource $urgbg i3wm.urgBG  #FFFF00
+set_from_resource $urgbg i3wm.urgBG  #000000
 set_from_resource $urgbd i3wm.urgBD  #FFFF00
 
 #class                    border  bckrnd  text    indic.  ch_brdr
@@ -66,7 +68,9 @@ smart_gaps    on
 smart_borders on
 
 for_window [class="URxvt"] border normal 1
-for_window [class="URxvt"] title_format "<span font='Inconsolata 10'> %title</span>
+for_window [class="URxvt"] title_format "<span font='monospace 10'> %title</span>
+for_window [class="st"] border normal 1
+for_window [class="st"] title_format "<span'monospace 10'> %title</span>
 
 # --- WINDOWS LAYOUT - END ---
 
@@ -212,7 +216,8 @@ set $wsTaskManager "11: "
 set $wsVM "12: "
 set $wsSteam "20: "
 set $wsDiscord "21: "
-set $wsMusic "100: "
+#set $wsMusic "100: "
+set $wsMusic "100: Music"
 
 workspace $ws1 output $output
 workspace $ws2 output $output
@@ -227,7 +232,7 @@ workspace $ws10 output $output
 
 workspace $wsDiscord output $output
 workspace $wsFiles output $output
-workspace $wsSteam output $output
+workspace $wsSteam output $output
 workspace $wsDiscord output $output
 workspace $wsMusic output $output
 
@@ -277,6 +282,7 @@ assign [class="Steam"] $wsSteam
 #assign [class="Gimp"] $ws7
 #assign [class="Blender"] $ws7
 
+assign [class="Deadbeef"] $wsMusic
 
 assign [class="discord"] $wsDiscord
 
@@ -391,12 +397,17 @@ bindsym XF86AudioPrev exec playerctl previous
 
 
 # --- DEFAULT EXECUTIONS ---
-exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal; exec $terminal -title Ranger -e ranger'
+exec --no-startup-id i3-msg 'workspace $ws1; exec $terminal -e newsboat; exec $terminal -title Ranger -e ranger'
 exec --no-startup-id i3-msg 'workspace $wsTaskManager; exec $terminal -title gotop -e gotop -b --color=alien; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $wsMusic; exec $terminal -e $musicplayer; workspace $ws1'
+#exec --no-startup-id i3-msg 'workspace $wsMusic; exec $terminal -e $musicplayer; workspace $ws1'
+exec --no-startup-id $musicplayer
+#exec --no-startup-id i3-msg '$musicplayer && sleep(2) && --pause'
 exec --no-startup-id $browser
 exec --no-startup-id $compositor
 exec --no-startup-id dropbox
+exec --no-startup-id udiskie -ans &
+#exec --no-startup-id dunst
+exec --no-startup-id pactl set-sink-volume 0 30%
 exec_always --no-startup-id feh --bg-fill $wallpaper
 exec_always --no-startup-id xrandr --output $output --mode $resolution
 

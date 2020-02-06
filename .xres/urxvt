@@ -5,7 +5,7 @@
 URxvt.transparent:                    true
 URxvt.foreground:                     COLFG
 URxvt.tintColor:                      COLBG
-URxvt.font:		              defaultFont
+URxvt.font:		              urxvtFont
 URxvt.saveLines:                      16384
 URxvt.buffered:                       true
 URxvt.depth:                          32
@@ -30,12 +30,15 @@ URxvt.cursorBlink:                    true
 
 URxvt.keysym.Shift-Up: 				  command:\033]720;1\007
 URxvt.keysym.Shift-Down:              command:\033]721;1\007
-URxvt.resize-font.smaller:	      	  C-u
-URxvt.resize-font.bigger:	          C-i
-!URxvt.keysym.C-u:   resize-font:bigger
-!URxvt.keysym.C-i:   resize-font:smaller
+!URxvt.resize-font.smaller:	      	  C-u
+!URxvt.resize-font.bigger:	          C-i
+URxvt.keysym.C-u:   resize-font:bigger
+URxvt.keysym.C-i:   resize-font:smaller
 URxvt.keysym.M-u:     perl:url-select:select_next
 URxvt.matcher.button: 1
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 ! ------ UNUSED ------
 

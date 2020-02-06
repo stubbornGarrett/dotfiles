@@ -5,11 +5,14 @@
 
 #define defaultWebbrowser firefox
 
-#define defaultFontSize	17
+#define defaultFontSize	16
 !#define defaultFont 	-*-dejavu sans mono-medium-r-normal-*-14-*-100-100-*-*-*-1
 !#define defaultFont 	xft:dejavu sans mono:pixelsize=14
 !#define defaultFont 	xft:inconsolata:pixelsize=defaultFontSize
-#define defaultFont xft:MONOSPACE-11:MEDIUM
+!#define defaultFont xft:MONOSPACE-11:MEDIUM
+#define defaultFont xft:MONOSPACE:pixelsize=16
+#define urxvtFont xft:MONOSPACE:pixelsize=16
+#define stFont MONOSPACE:pixelsize=16
 
 
 ! ------ COLOR THEME ------
@@ -17,20 +20,22 @@
 ! -------------------------
 !#include ".xres/color/RGB"
 #include ".xres/color/Alien"
+!#include ".xres/color/Alien-st"
 
 
 ! ------ MODULES ------
 #include ".xres/urxvt"
+!#include ".xres/xterm"
+#include ".xres/st"
 #include ".xres/i3"
 #include ".xres/i3status"
-#include ".xres/xterm"
 
 
 ! ------ COLORS ------
 
-*foreground:  COLFG
-*background:  COLBG
-*cursorColor: COLCR
+*.foreground:  COLFG
+*.background:  COLBG
+*.cursorColor: COLCR
 
 !! black
 *color0 : COL00
@@ -61,11 +66,11 @@
 
 ! ------ FONTS ------
 
-*.font:				defaultFont
+*.font:			stFont
 
 Xft.dpi:      	96
 Xft.antialias:	true
-Xft.rgba:	rgb
+!Xft.rgba:	rgba
 Xft.hinting:	true
 Xft.hintstyle:	hintslight
 Xft.lcdfilter:	lcddefault

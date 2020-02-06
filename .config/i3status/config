@@ -24,7 +24,7 @@ order += "tztime local"
 order += "tztime berlin"
 
 wireless wlp5s0 {
-  format_up = "%quality SSID: %essid - %frequency"
+  format_up = "%quality %essid - %frequency"
   format_down = ""
   align = "center"
 }
